@@ -1,4 +1,4 @@
-package com.ros.featuremanagement.demo;
+package com.ros.featuremanagement.featuremanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
