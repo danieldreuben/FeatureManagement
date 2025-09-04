@@ -1,6 +1,6 @@
 # Feature Manager Project
 
-This project provides a **Feature Management system** built on **Spring Boot** that allows dynamic enabling/disabling of application features based on various filters such as user targeting, groups, roles, or custom conditions. The system integrates with **Azure App Configuration** for feature flag storage and supports custom filters for advanced targeting.
+This project provides a **Feature Management system** built on **Spring Boot** that allows dynamic enabling/disabling of application features based on various filters such as user targeting, groups, roles, or custom conditions. This feature management module can integrate with **Azure App Configuration** and feature YAML model via decoupled repository (AzzureAppConfigFeatureRepository.java).  Allowing feature flag storage and supports custom filters for advanced targeting.
 
 ---
 
@@ -45,5 +45,5 @@ This project provides a **Feature Management system** built on **Spring Boot** t
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-org/feature-manager.git
-cd feature-manager
+git clone https://github.com/danieldreuben/FeatureManagement/feature-manager.git
+
