@@ -1,6 +1,6 @@
 # Feature Manager Project
 
-This project provides a **Feature Management system** built on **Spring Boot** that allows dynamic enabling/disabling of application features based on various filters such as user targeting, groups, roles, or custom conditions. This feature management module can integrate with **Azure App Configuration** and feature YAML model via decoupled repository (AzzureAppConfigFeatureRepository.java).  Allowing feature flag storage and supports custom filters for advanced targeting.
+This project implements a Feature Management system in Spring Boot that enables dynamic control of application features. Features can be toggled on or off, including user targeting groups, roles, or custom conditions. The solution supports multiple backends through decoupled repositories, such as Azure App Configuration (AzureAppConfigFeatureRepository) and a YAML-based model. It also allows defining custom filters for advanced targeting scenarios, providing a scalable and extensible approach to feature flag management.
 
 ---
 
