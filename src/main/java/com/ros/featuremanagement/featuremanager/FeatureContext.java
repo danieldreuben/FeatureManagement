@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 public class FeatureContext {
     private final String userId;
     private final List<String> roles;
-
-    public FeatureContext(String userId, List<String> roles) {
+    private final List<String> permissions;
+    
+    public FeatureContext(String userId, List<String> roles, List<String> permissions) {
         this.userId = userId;
         this.roles = roles != null ? roles : Collections.emptyList();
+        this.permissions = permissions != null ? permissions : Collections.emptyList();
     }
 
     public FeatureContext(String userId, Set<String> roles) {
@@ -19,6 +21,7 @@ public class FeatureContext {
         this.roles = roles != null
                 ? roles.stream().collect(Collectors.toList())
                 : Collections.emptyList();
+        this.permissions = Collections.emptyList();        
     }
 
     public String getUserId() {
@@ -28,4 +31,7 @@ public class FeatureContext {
     public List<String> getRoles() {
         return roles;
     }
+    public List<String> getPermissions() {
+        return permissions;
+    }    
 }

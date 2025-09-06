@@ -1,16 +1,19 @@
 features:
   - name: AlwaysOnFeature
+    enabled: true
     filters:
       - name: AlwaysOn
         parameters: {}
 
   - name: AdminOnlyFeature
+    enabled: true
     filters:
       - name: RoleBased
         parameters:
           role: admin
 
   - name: TimeLimitedFeature
+    enabled: false
     filters:
       - name: TimeBased
         parameters:
@@ -18,15 +21,27 @@ features:
           end:   "2025-09-03T18:00:00"
 
   - name: BetaRolloutFeature
+    enabled: true
     filters:
       - name: Percentage
         parameters:
           percentage: 0.2
 
   - name: TargetingFeature
+    enabled: true  
     filters:
       - name: Targeting
         parameters:
           users: ["alice", "bob"]
           groups: ["beta-testers", "qa"]
+          permissions: ["invoice.read"]
+
+  - name: RoleAndPermissionFeature
+    enabled: true
+    filters:
+      - name: RoleAndPermission
+        parameters:
+          role: ["admin", "director"]
+          permission: ["invoice.write", "app.sox"]
+        
 

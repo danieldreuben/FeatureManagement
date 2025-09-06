@@ -47,6 +47,7 @@ public class YamlFeatureRepository implements FeatureRepository {
                             FeatureYaml::getName,
                             fy -> new FeatureDefinition(
                                     fy.getName(),
+                                    fy.getEnabled(),
                                     fy.getFilters().stream()
                                             .map(f -> new FilterConfig(f.getName(), f.getParameters()))
                                             .collect(Collectors.toList())
@@ -73,10 +74,14 @@ public class YamlFeatureRepository implements FeatureRepository {
 
     public static class FeatureYaml {
         private String name;
+        private boolean enabled;
         private List<FilterYaml> filters;
 
         public String getName() { return name; }
         public void setName(String name) { this.name = name; }
+
+        public boolean getEnabled() { return enabled; }
+        public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
         public List<FilterYaml> getFilters() {
             return filters != null ? filters : new ArrayList<>();

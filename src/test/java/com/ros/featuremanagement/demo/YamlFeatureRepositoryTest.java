@@ -4,7 +4,6 @@ import com.ros.featuremanagement.featuremanager.FeatureContext;
 import com.ros.featuremanagement.featuremanager.FeatureDefinition;
 import com.ros.featuremanagement.featuremanager.FeatureManager;
 import com.ros.featuremanagement.featuremanager.FeatureRepository;
-import com.ros.featuremanagement.featuremanager.FilterConfig;
 import com.ros.featuremanagement.featuremanager.impl.YamlFeatureRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +20,7 @@ class YamlFeatureRepositoryTest {
         @BeforeEach
         void setUp() {
         FeatureRepository yamlRepo = new YamlFeatureRepository("feature.yaml");
-        
+
         fm = new FeatureManager(
                 yamlRepo,
                 Map.of(
@@ -30,20 +29,33 @@ class YamlFeatureRepositoryTest {
                         "Percentage", (ctx, params) -> Math.random() < (double) params.getOrDefault("percentage", 0.0),
                         "TimeBased", (ctx, params) -> true, // skip for now
                         "Targeting", (ctx, params) -> {
-                            @SuppressWarnings("unchecked")
-                            List<String> users = (List<String>) params.getOrDefault("users", List.of());
-                            @SuppressWarnings("unchecked")
-                            List<String> groups = (List<String>) params.getOrDefault("groups", List.of());
+                                @SuppressWarnings("unchecked")
+                                List<String> users = (List<String>) params.getOrDefault("users", List.of());
+                                @SuppressWarnings("unchecked")
+                                List<String> groups = (List<String>) params.getOrDefault("groups", List.of());
 
-                            if (users.contains(ctx.getUserId())) {
+                                if (users.contains(ctx.getUserId())) {
                                 return true;
-                            }
-                            return ctx.getRoles().stream().anyMatch(groups::contains);
+                                }
+                                return ctx.getRoles().stream().anyMatch(groups::contains);
+                        },
+                        "RoleAndPermission", (ctx, params) -> {
+                                @SuppressWarnings("unchecked")
+                                List<String> roles = (List<String>) params.getOrDefault("roles", List.of());
+                                @SuppressWarnings("unchecked")
+                                List<String> permissions = (List<String>) params.getOrDefault("permissions", List.of());
+
+                                boolean hasRole = roles.isEmpty() || ctx.getRoles().stream().anyMatch(roles::contains);
+                                boolean hasPermission = permissions.isEmpty() || ctx.getPermissions().stream().anyMatch(permissions::contains);
+
+                                return hasRole && hasPermission;
                         }
+
                 ),
                 (ctx, params) -> false // default filter
         );
-    }
+        }
+
         @Test
         void testYamlFeatureLoading() {
                 FeatureRepository repo = new YamlFeatureRepository("feature.yaml");
@@ -60,8 +72,8 @@ class YamlFeatureRepositoryTest {
 
         @Test
         void testTargetingFeatureForUser() {
-                FeatureContext userAlice = new FeatureContext("alice", List.of());
-                FeatureContext userEve = new FeatureContext("eve", List.of("guest"));
+                FeatureContext userAlice = new FeatureContext("alice", List.of(), List.of());
+                FeatureContext userEve = new FeatureContext("eve", List.of("guest"), List.of());
 
                 assertTrue(fm.isEnabled("TargetingFeature", userAlice),
                         "alice should match via users list");
@@ -71,14 +83,13 @@ class YamlFeatureRepositoryTest {
 
         @Test
         void testTargetingFeatureForGroup() {
-                FeatureContext userBob = new FeatureContext("bob", List.of("qa"));
-                FeatureContext userEve = new FeatureContext("eve", List.of("guest"));
+                FeatureContext userBob = new FeatureContext("bob", List.of("qa"), List.of());
+                FeatureContext userEve = new FeatureContext("eve", List.of("guest"), List.of());
 
                 assertTrue(fm.isEnabled("TargetingFeature", userBob),
                         "bob should match via group 'qa'");
                 assertFalse(fm.isEnabled("TargetingFeature", userEve),
                         "eve should not match any targeting rule");
         }
-
 }
 

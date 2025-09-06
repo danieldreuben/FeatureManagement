@@ -64,7 +64,7 @@ class InMemoryFeatureRepositoryTest {
 
     @Test
     void testAlwaysOnFilter() {
-        FeatureDefinition def = new FeatureDefinition("FeatureA",
+        FeatureDefinition def = new FeatureDefinition("FeatureA", true,
                 List.of(new FilterConfig("AlwaysOn", Collections.emptyMap())));
         repo.addFeature(def);
 
@@ -74,7 +74,7 @@ class InMemoryFeatureRepositoryTest {
 
     @Test
     void testRoleBasedFilterSuccess() {
-        FeatureDefinition def = new FeatureDefinition("FeatureB",
+        FeatureDefinition def = new FeatureDefinition("FeatureB", true,
                 List.of(new FilterConfig("RoleBased", Map.of("role", "admin"))));
         repo.addFeature(def);
 
@@ -84,7 +84,7 @@ class InMemoryFeatureRepositoryTest {
 
     @Test
     void testRoleBasedFilterFailure() {
-        FeatureDefinition def = new FeatureDefinition("FeatureC",
+        FeatureDefinition def = new FeatureDefinition("FeatureC", true,
                 List.of(new FilterConfig("RoleBased", Map.of("role", "manager"))));
         repo.addFeature(def);
 
@@ -94,7 +94,7 @@ class InMemoryFeatureRepositoryTest {
 
     @Test
     void testUnknownFilterFallsBackToDefault() {
-        FeatureDefinition def = new FeatureDefinition("FeatureD",
+        FeatureDefinition def = new FeatureDefinition("FeatureD", true,
                 List.of(new FilterConfig("UnknownFilter", Collections.emptyMap())));
         repo.addFeature(def);
 
@@ -133,8 +133,8 @@ class InMemoryFeatureRepositoryTest {
     void testGetAllFeatures() {
         InMemoryFeatureRepository repo = new InMemoryFeatureRepository();
 
-        repo.addFeature(new FeatureDefinition("F1", List.of()));
-        repo.addFeature(new FeatureDefinition("F2", List.of()));
+        repo.addFeature(new FeatureDefinition("F1", true, List.of()));
+        repo.addFeature(new FeatureDefinition("F2", true, List.of()));
 
         Map<String, FeatureDefinition> all = repo.getAllFeatures();
         assertEquals(2, all.size());

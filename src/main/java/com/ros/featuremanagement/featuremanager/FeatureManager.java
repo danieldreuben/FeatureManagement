@@ -18,9 +18,11 @@ public class FeatureManager {
 
     public boolean isEnabled(String featureName, FeatureContext ctx) {
         FeatureDefinition def = repository.getFeature(featureName);
-        if (def == null) return false;
+
+        if (def == null || !def.getEnabled()) { return false; }
 
         for (FilterConfig filterConfig : def.getFilters()) {
+      
             FeatureFilter filter = filters.getOrDefault(filterConfig.getName(), defaultFilter);
             if (filter.evaluate(ctx, filterConfig.getParameters())) {
                 return true; // short-circuit success

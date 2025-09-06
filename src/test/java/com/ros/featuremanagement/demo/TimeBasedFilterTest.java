@@ -56,7 +56,7 @@ class TimeBasedFilterTest {
         LocalDateTime start = now.minusMinutes(1);
         LocalDateTime end   = now.plusMinutes(1);
 
-        FeatureDefinition def = new FeatureDefinition("FeatureTime",
+        FeatureDefinition def = new FeatureDefinition("FeatureTime", true,
                 List.of(new FilterConfig("TimeBased", Map.of(
                         "start", start.toString(),
                         "end", end.toString()
@@ -73,7 +73,7 @@ class TimeBasedFilterTest {
         LocalDateTime start = now.minusHours(2);
         LocalDateTime end   = now.minusHours(1);
 
-        FeatureDefinition def = new FeatureDefinition("FeatureTimeExpired",
+        FeatureDefinition def = new FeatureDefinition("FeatureTimeExpired", true,
                 List.of(new FilterConfig("TimeBased", Map.of(
                         "start", start.toString(),
                         "end", end.toString()
