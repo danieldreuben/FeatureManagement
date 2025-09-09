@@ -1,6 +1,7 @@
 package com.ros.featuremanagement.featuremanager;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class FeatureManager {
     private final FeatureRepository repository;
@@ -30,6 +31,15 @@ public class FeatureManager {
         }
         return false;
     }
+
+    /** ✅ New method: return all features with their enabled/disabled status */
+    public Map<String, Boolean> getAllFeatures(FeatureContext ctx) {
+        return repository.getAllFeatures().keySet().stream()
+                .collect(Collectors.toMap(
+                        featureName -> featureName,
+                        featureName -> isEnabled(featureName, ctx)
+                ));
+    }    
 
     public void refreshFeatures() {
         repository.refresh();

@@ -1,6 +1,6 @@
 # Feature Manager Project
 
-This project implements a Feature Management system in Spring Boot that enables dynamic control of application features. Features can be toggled on or off, including user targeting groups, roles, or custom conditions. The solution supports multiple backends through decoupled repositories, such as Azure App Configuration (AzureAppConfigFeatureRepository) and a YAML-based model. It also allows defining custom filters for advanced targeting scenarios, providing a scalable and extensible approach to feature flag management.
+Spring boot Feature Management system enables dynamic control of application features. Features can be toggled on or off, including user targeting groups, roles, or custom conditions. The FM supports multiple backends through decoupled repositories, such as Azure App Configuration (AzureAppConfigFeatureRepository) and a YAML-based model. It also allows custom filters (Java Lambdas) for advanced targeting scenarios, providing a scalable and extensible approach to feature flag management.
 
 ---
 
@@ -32,6 +32,21 @@ This project implements a Feature Management system in Spring Boot that enables 
 ---
 
 ## Getting Started
+
+mvn spring-boot:run
+
+# Check one feature
+curl -H "X-User-Id: bob" \
+     -H "X-Roles: admin" \
+     -H "X-Permissions: invoice.read" \
+     http://localhost:8080/features/RoleAndPermissionFeature
+
+# Check all features
+curl -H "X-User-Id: bob" \
+     -H "X-Roles: admin" \
+     -H "X-Permissions: invoice.read" \
+     http://localhost:8080/features
+
 
 ### Prerequisites
 

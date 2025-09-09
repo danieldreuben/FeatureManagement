@@ -27,4 +27,8 @@ public class AzureAppConfigFeatureRepository implements FeatureRepository {
         System.out.println("Refreshing features from Azure App Config...");
         // cache = loadFromAzure();
     }
+
+    public void addFeature(FeatureDefinition def) {
+        cache.put(def.getName(), def);
+    }    
 }

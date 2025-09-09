@@ -102,4 +102,9 @@ public class YamlFeatureRepository implements FeatureRepository {
         public Map<String, Object> getParameters() { return parameters; }
         public void setParameters(Map<String, Object> parameters) { this.parameters = parameters; }
     }
+
+    public void addFeature(FeatureDefinition def) {
+        cache.put(def.getName(), def);
+    }    
+
 }

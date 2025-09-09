@@ -153,4 +153,22 @@ class InMemoryFeatureRepositoryTest {
         FeatureContext ctx = new FeatureContext("user1", Set.of("admin"));
         assertFalse(featureManager.isEnabled("NonExistent", ctx));
     }
+
+    @Test
+    void testDisabledFeatureAlwaysReturnsFalse() {
+        // Feature is globally disabled
+        repo.addFeature(new FeatureDefinition(
+                "DisabledFeature",
+                false, // globally disabled
+                List.of(new FilterConfig("AlwaysOn", Map.of()))
+        ));        
+        boolean result = featureManager.isEnabled("DisabledFeature", new FeatureContext("u1", List.of(), List.of()));
+        assertFalse(result, "Disabled feature should always return false");
+    }
+
+    @Test
+    void testUnknownFeatureReturnsFalse() {
+        boolean result = featureManager.isEnabled("NoSuchFeature", new FeatureContext("u1", List.of(), List.of()));
+        assertFalse(result, "Unknown feature should return false");
+    }    
 }
