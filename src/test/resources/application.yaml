@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: demo
+feature:
+  appconfig:
+    endpoint: https://fake-appconfig.azconfig.io
+    keys:
+      - Feature:SearchUI
+      - Feature:BetaMode
+    label: dev
+    refresh-interval: 300s

@@ -44,4 +44,3 @@ features:
           role: ["admin", "director"]
           permission: ["invoice.write", "app.sox"]
         
-
