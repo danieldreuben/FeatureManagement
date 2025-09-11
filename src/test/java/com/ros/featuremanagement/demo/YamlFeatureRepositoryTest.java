@@ -24,10 +24,7 @@ class YamlFeatureRepositoryTest {
         fm = new FeatureManager(
                 yamlRepo,
                 Map.of(
-                        "AlwaysOn", (ctx, params) -> true,
-                        "RoleBased", (ctx, params) -> ctx.getRoles().contains(params.get("role")),
-                        "Percentage", (ctx, params) -> Math.random() < (double) params.getOrDefault("percentage", 0.0),
-                        "TimeBased", (ctx, params) -> true, // skip for now
+
                         "Targeting", (ctx, params) -> {
                                 @SuppressWarnings("unchecked")
                                 List<String> users = (List<String>) params.getOrDefault("users", List.of());

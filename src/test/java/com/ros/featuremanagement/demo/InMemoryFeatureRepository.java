@@ -27,7 +27,7 @@ class InMemoryFeatureRepositoryTest {
 	void setup() {
 		repo = new InMemoryFeatureRepository();
 
-		Map<String, FeatureFilter> filters = new HashMap<>();
+		/*Map<String, FeatureFilter> filters = new HashMap<>();
 		filters.put("AlwaysOn", (ctx, params) -> true);
 		filters.put("Percentage", (ctx, params) ->
 				Math.random() < (double) params.getOrDefault("percentage", 0.0));
@@ -53,11 +53,11 @@ class InMemoryFeatureRepositoryTest {
 				return true;
 			}
 			return ctx.getRoles().stream().anyMatch(groups::contains);
-		});
+		});*/
 
-		FeatureFilter defaultFilter = (ctx, params) -> false;
+		//FeatureFilter defaultFilter = (ctx, params) -> false;
 
-		featureManager = new FeatureManager(repo, filters, defaultFilter);
+		featureManager = new FeatureManager(repo);
 	}
 
 
@@ -132,12 +132,12 @@ class InMemoryFeatureRepositoryTest {
     @Test
     void testGetAllFeatures() {
         InMemoryFeatureRepository repo = new InMemoryFeatureRepository();
-
+        int initial = repo.getAllFeatures().size();
         repo.addFeature(new FeatureDefinition("F1", true, List.of()));
         repo.addFeature(new FeatureDefinition("F2", true, List.of()));
 
         Map<String, FeatureDefinition> all = repo.getAllFeatures();
-        assertEquals(2, all.size());
+        assertEquals(initial + 2, all.size());
         assertTrue(all.containsKey("F1"));
         assertTrue(all.containsKey("F2"));
     }

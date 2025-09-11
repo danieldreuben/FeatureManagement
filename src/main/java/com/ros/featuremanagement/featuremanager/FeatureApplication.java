@@ -34,13 +34,13 @@ public class FeatureApplication {
 
             // Call single feature
             ResponseEntity<Boolean> response = rest.exchange(
-                "http://localhost:8080/features/AdminRoleFeature",
+                "http://localhost:8080/features/AdminFeature",
                 HttpMethod.GET,
                 entity,
                 Boolean.class
             );
 
-            System.out.println("RoleAndPermissionFeature enabled? " + response.getBody());
+            System.out.println("admin enabled? " + response.getBody());
 
             // Call all features
             ResponseEntity<String> allResponse = rest.exchange(

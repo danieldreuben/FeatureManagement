@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ros.featuremanagement.featuremanager.impl.InMemoryFeatureRepository;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,9 +16,10 @@ public class FeatureController {
     @Autowired
     FeatureContext fc;
 
-    public FeatureController() {
-        InMemoryFeatureRepository repo = new InMemoryFeatureRepository();
-        featureManager = new FeatureManagerConfig().getDefaultFeatures(repo);
+    public FeatureController(FeatureManager fm) {
+        //InMemoryFeatureRepository repo = new InMemoryFeatureRepository();
+        //featureManager = new FeatureManagerConfig().getDefaultFeatures(repo);
+        this.featureManager = fm;
     }
 
     /**
