@@ -58,7 +58,7 @@ public class FeatureManagerConfig {
 
 		FeatureManager featureManager = new FeatureManager(repo, filters, defaultFilter);
 
-        FeatureDefinition def = new FeatureDefinition("AdminFeature", true,
+        FeatureDefinition def = new FeatureDefinition("AdminRoleFeature", true,
                 List.of(new FilterConfig("RoleBased", Map.of("role", "admin"))));
         repo.addFeature(def);
 

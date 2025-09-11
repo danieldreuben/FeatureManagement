@@ -28,13 +28,13 @@ public class FeatureApplication {
             HttpHeaders headers = new HttpHeaders();
             headers.set("X-User-Id", "bob");
             headers.set("X-Roles", String.join(",", List.of("admin")));
-            headers.set("X-Permissions", String.join(",", List.of("invoice.read")));
+            headers.set("X-Permissions", String.join(",", List.of("invoice.read","admin")));
 
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
             // Call single feature
             ResponseEntity<Boolean> response = rest.exchange(
-                "http://localhost:8080/features/RoleAndPermissionFeature",
+                "http://localhost:8080/features/AdminRoleFeature",
                 HttpMethod.GET,
                 entity,
                 Boolean.class

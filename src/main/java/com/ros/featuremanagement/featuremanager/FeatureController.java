@@ -1,5 +1,6 @@
 package com.ros.featuremanagement.featuremanager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.ros.featuremanagement.featuremanager.impl.InMemoryFeatureRepository;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 public class FeatureController {
 
     private  FeatureManager featureManager;
+    @Autowired
+    FeatureContext fc;
 
     public FeatureController() {
         InMemoryFeatureRepository repo = new InMemoryFeatureRepository();
@@ -22,8 +25,21 @@ public class FeatureController {
     /**
      * GET /features/{name}
      * Check if a single feature is enabled for the current user context.
+     * note: user context is injected from FeatureContextConfig.
      */
     @GetMapping("/{name}")
+    public boolean isFeatureEnabled(
+            @PathVariable String name) {
+        //System.out.println("user: " + fc.getUserId());
+        return featureManager.isEnabled(name, fc);
+    }
+
+    /**
+     * GET /features/{name}
+     * Check if a single feature is enabled for the current user context.
+     * TODO: RequestHeaders or request context bean (see: FeatureContextConfig)?
+     */
+    /*@GetMapping("/{name}")
     public boolean isFeatureEnabled(
             @PathVariable String name,
             @RequestHeader("X-User-Id") String userId,
@@ -32,10 +48,9 @@ public class FeatureController {
 
         List<String> roles = parseHeader(rolesHeader);
         List<String> permissions = parseHeader(permissionsHeader);
-
         FeatureContext ctx = new FeatureContext(userId, roles, permissions);
         return featureManager.isEnabled(name, ctx);
-    }
+    }*/
 
     /**
      * GET /features
