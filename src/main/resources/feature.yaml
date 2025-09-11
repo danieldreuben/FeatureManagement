@@ -36,11 +36,4 @@ features:
           groups: ["beta-testers", "qa"]
           permissions: ["invoice.read"]
 
-  - name: RoleAndPermissionFeature
-    enabled: true
-    filters:
-      - name: RoleAndPermission
-        parameters:
-          role: ["admin", "director"]
-          permission: ["invoice.write", "app.sox"]
         
