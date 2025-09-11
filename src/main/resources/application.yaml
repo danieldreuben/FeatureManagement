@@ -1,8 +1,0 @@
-feature:
-  appconfig:
-    endpoint: https://<your-appconfig-name>.azconfig.io
-    keys:
-      - Feature:SearchUI
-      - Feature:BetaMode
-    label: dev
-    refresh-interval: 300s
