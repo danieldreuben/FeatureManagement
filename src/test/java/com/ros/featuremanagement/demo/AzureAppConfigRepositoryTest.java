@@ -9,6 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// TODO: Build out units (not covered by inmemory..)
+
 @SpringBootTest(classes = AzureAppConfigFeatureRepositorySpringTest.TestConfig.class)
 class AzureAppConfigFeatureRepositorySpringTest {
 

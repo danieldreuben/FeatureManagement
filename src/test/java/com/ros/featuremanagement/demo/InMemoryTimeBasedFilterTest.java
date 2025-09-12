@@ -18,7 +18,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TimeBasedFilterTest {
+class InMemoryTimeBasedFilterTest {
 
     private InMemoryFeatureRepository repo;
     private FeatureManager featureManager;
