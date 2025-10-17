@@ -1,6 +1,7 @@
 # Feature Manager Project
 
-Spring boot Feature Management system enables dynamic control of application features. Features can be toggled on or off, including user targeting groups, roles, or custom conditions. The FM supports multiple backends through decoupled repositories, such as Azure App Configuration (AzureAppConfigFeatureRepository) and a YAML-based model. It also allows custom filters (Java Lambdas) for advanced targeting scenarios, providing a scalable and extensible approach to feature flag management.
+Feature flag solution provides control over app feature. Features can be toggled on or off, including user targeting of groups, roles, or custom conditions. Multiple backends through repository pattern (Azure App Configuration, File system YAML, InMemory). Enables custom (features) 
+filters (via Java Lambdas) for advanced targeting scenarios.
 
 ---
 
